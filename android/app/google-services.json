@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "518821065725",
+    "project_id": "amadia-push-notifications",
+    "storage_bucket": "amadia-push-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518821065725:android:65bf72402852ce2e65df94",
+        "android_client_info": {
+          "package_name": "com.example.push_notifications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518821065725-4k37fc43gab2lqsikp37dt4hv47kqjj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3n4sI71Rrxpt9JcO397VkHYlzKUS-6iI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518821065725-4k37fc43gab2lqsikp37dt4hv47kqjj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
