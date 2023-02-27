@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:push_notifications/notification_screen.dart';
 
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -249,7 +250,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const NotificationScreen(),
     );
   }
 }
@@ -306,9 +307,8 @@ class _MyHomePageState extends State<MyHomePage> {
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     //get data
-    final QuerySnapshot data = await FirebaseFirestore.instance
-        .collection("notifications")
-        .get();
+    final QuerySnapshot data =
+        await FirebaseFirestore.instance.collection("notifications").get();
 
     for (var element in data.docs) {
       flutterLocalNotificationsPlugin.show(
