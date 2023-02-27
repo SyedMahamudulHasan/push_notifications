@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -272,6 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _requestPermissions() async {
+    // ios app permission
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin>()
@@ -280,14 +282,7 @@ class _MyHomePageState extends State<MyHomePage> {
           badge: true,
           sound: true,
         );
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            MacOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+    // android app permission
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
@@ -299,6 +294,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _showNotification() async {
+    // setup notifications details.
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       'dbfoo',
@@ -309,12 +305,26 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      'This is a title',
-      'This is hello dart',
-      platformChannelSpecifics,
-    );
+    //get data
+    final QuerySnapshot data = await FirebaseFirestore.instance
+        .collection("notifications")
+        .get();
+
+    for (var element in data.docs) {
+      flutterLocalNotificationsPlugin.show(
+        0,
+        'This is a title',
+        element["notification"],
+        platformChannelSpecifics,
+      );
+    }
+
+    // await flutterLocalNotificationsPlugin.show(
+    //   0,
+    //   'This is a title',
+    //   'This is hello dart',
+    //   platformChannelSpecifics,
+    // );
   }
 
   @override
